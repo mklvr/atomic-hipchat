@@ -3,7 +3,7 @@ atomic-hipchat
 
 Introduction
 ------------
-Fedora Atomic Workstation (See: http://www.projectatomic.io/docs/fedora-atomic-workstation/) currently doesn't support installing RPMs that dump files into '/opt'. This includes hipchat. These repository helps  
+Fedora Atomic Workstation (See: http://www.projectatomic.io/docs/fedora-atomic-workstation/) currently doesn't support installing RPMs that dump files into '/opt'. This includes hipchat. This repository can be used to build a container image for hipchat to be run with 'atomic'.
 
     
 Usage
