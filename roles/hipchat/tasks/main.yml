@@ -1,0 +1,63 @@
+---
+- name: Adding hipchat repository
+  yum_repository:
+    name: hipchat
+    baseurl: https://atlassian.artifactoryonline.com/atlassian/hipchat-yum-client/
+    enabled: yes
+    description: Repository for Atlassian's
+    gpgcheck: no
+    state: present
+
+- name: Add hipchat
+  dnf:
+    name: "{{ item }}"
+    state: latest
+  with_items:
+    - alsa-lib
+    - compat-openssl10
+    - hipchat4
+    - libstdc++
+    - qt5-qtbase-devel
+    - qt5-qtmultimedia
+    - qt5-qtscript
+    - qt5-qdbusviewer
+    - qt5-qttools-common
+    - qt5-qtbase-common
+    - qt5-qtquickcontrols
+    - qt5-qtx11extras
+    - qt5-qtwebsockets
+    - qt5-qtbase-gui
+    - qt5-qtwayland
+    - qt5-qtdeclarative-devel
+    - qt5-qtconnectivity
+    - qt5-qttools
+    - qt5
+    - qt5-qtbase
+    - qt5-qtsvg
+    - qt5-rpm-macros
+    - adwaita-qt5-1.0-3.fc27.x86_64
+    - qt5-qtwebengine-devel
+    - qt5-qtdeclarative
+    - qt5-qtwebengine
+    - qt5-qtquickcontrols2
+    - qt5-qtwebchannel-devel
+    - qt5-qt3d
+    - qt5-qtwebkit
+    - qt5-qtdoc
+
+- name: Symlink the current crypto libraries
+  shell: |
+    cd /opt/HipChat/lib; \
+    ln -s /usr/lib64/libcrypto.so.1.0.2m; \
+    ln -s libcrypto.so.1.0.2m /opt/HipChat4/lib/libcrypto.so; \
+    ln -s /usr/lib64/libgcrypt.so.20.2.1; \
+    ln -s libgcrypt.so.20.2.1 /opt/HipChat4/lib/libgcrypt.so; \
+    ln -s /usr/lib64/libssl.so.1.0.2m; \
+    ln -s libssl.so.1.0.2m /opt/HipChat4/lib/libssl.so;
+
+- name: Adding user to run application
+  user:
+    name: user
+    shell: /bin/bash
+    state: present
+    uid: 1000

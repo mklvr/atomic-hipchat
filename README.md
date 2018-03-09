@@ -8,20 +8,20 @@ Fedora Atomic Workstation (See: http://www.projectatomic.io/docs/fedora-atomic-w
     
 Usage
 -----
-Requirements: buildah (https://github.com/projectatomic/buildah)
+Requirements: buildah (https://github.com/projectatomic/buildah), ansible (https://github.com/ansible/ansible)
 
 ``` 
-user@localhost$ sudo ./build.sh
+user@localhost$ sudo ansible-playbook build.yml
 ```
 
-This will create a local container image ready to run hipchat. From here, you can push it to you're image repository. To push it to a locally running docker instance run:
+This will create a local container image ready to run hipchat. From here, you can push it to you're image repository. By default, we push it to the locally running docker instance, but we can push with buildah with:
 ```
-user@localhost$ sudo buildah push docker.io/$USER/hipchat docker-daemon:$USER/hipchat:latest
+user@localhost$ sudo buildah push docker.io/mklvr/hipchat docker-daemon:mklvr/hipchat:latest
 ```
 
 To run the container from your Fedora Atomic Workstation:
 ```
-user@localhost$ atomic run docker.io/$USER/hipchat:latest
+user@localhost$ atomic run docker.io/mklvr/hipchat:latest
 ```
 
 Known Issues
